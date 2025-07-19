@@ -108,13 +108,13 @@ class CarUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = CarForm
     success_url = reverse_lazy("taxi:car-list")
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         car = self.get_object()
         context["is_user_driver"] = (
             car.drivers.filter(id=self.request.user.id).exists())
         return context
+
 
 def assign_or_delete_driver(request, pk):
     car = Car.objects.get(id=pk)
