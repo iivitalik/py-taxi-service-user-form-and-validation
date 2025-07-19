@@ -34,8 +34,8 @@ class Driver(AbstractUser):
         license_number = self.license_number
         if len(license_number) != 8:
             raise ValidationError(
-                {"license_number":
-                     "License must be exactly 8 characters long"})
+                {"license_number": "License must be exactly 8 "
+                                   "characters long"})
         if (not license_number[:3].isalpha()
                 or not license_number[:3].isupper()):
             raise ValidationError({
