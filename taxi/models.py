@@ -32,16 +32,20 @@ class Driver(AbstractUser):
         super().clean()
         license_number = self.license_number
         if len(license_number) != 8:
-            raise ValidationError({'license_number': "License must be exactly 8 characters long"})
+            raise ValidationError(
+                {"license_number": "License must be exactly 8 characters long"})
         if not license_number[:3].isalpha() or not license_number[:3].isupper():
-            raise ValidationError({'license_number': "First 3 characters must be uppercase letters"})
+            raise ValidationError({
+                "license_number": "First 3 characters must be uppercase letters"})
         if not license_number[3:].isdigit():
-            raise ValidationError({'license_number': "Last 5 characters must be digits"})
+            raise ValidationError({
+                "license_number": "Last 5 characters must be digits"})
 
 
 class Car(models.Model):
     model = models.CharField(max_length=255)
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    manufacturer = models.ForeignKey(Manufacturer,
+                                     on_delete=models.CASCADE)
     drivers = models.ManyToManyField(Driver, related_name="cars")
 
     def __str__(self):
