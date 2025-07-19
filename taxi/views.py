@@ -116,7 +116,6 @@ class CarUpdateView(LoginRequiredMixin, generic.UpdateView):
             car.drivers.filter(id=self.request.user.id).exists())
         return context
 
-
 def assign_or_delete_driver(request, pk):
     car = Car.objects.get(id=pk)
     driver = request.user
